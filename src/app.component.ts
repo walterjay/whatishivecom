@@ -4,7 +4,6 @@ import { NgOptimizedImage } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FeatureCardComponent, Feature } from './components/feature-card/feature-card.component';
-import { HiveExplainerComponent } from './components/hive-explainer/hive-explainer.component';
 import { LiveFeedComponent } from './components/live-feed/live-feed.component';
 import { StatsComponent } from './components/stats/stats.component';
 
@@ -26,7 +25,7 @@ interface Project {
     <section class="hero-bg text-center py-24 px-4">
       <h1 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight">Unleash Your Voice. <span class="text-red-400">Unlock Your Value.</span></h1>
       <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">Welcome to Hive: a decentralized, censorship-resistant social blockchain where you own your content and earn rewards for your creativity.</p>
-      <a href="#explainer" (click)="scrollTo($event, 'explainer')" class="mt-8 inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105 duration-300">
+      <a href="#features" (click)="scrollTo($event, 'features')" class="mt-8 inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105 duration-300">
         Start Exploring
       </a>
     </section>
@@ -72,15 +71,6 @@ interface Project {
         </div>
     </section>
 
-    <!-- Interactive Explainer Section -->
-    <section id="explainer" class="py-20 bg-black bg-opacity-20 scroll-mt-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-4">Have Questions?</h2>
-            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Use our AI assistant to learn about Hive in simple terms. Ask anything you're curious about!</p>
-            <app-hive-explainer></app-hive-explainer>
-        </div>
-    </section>
-
     <!-- Projects Section -->
     <section id="projects" class="py-20 bg-gray-900 scroll-mt-20">
         <div class="container mx-auto px-4">
@@ -116,7 +106,7 @@ interface Project {
 </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HeaderComponent, FooterComponent, FeatureCardComponent, HiveExplainerComponent, LiveFeedComponent, StatsComponent, NgOptimizedImage]
+  imports: [HeaderComponent, FooterComponent, FeatureCardComponent, LiveFeedComponent, StatsComponent, NgOptimizedImage]
 })
 export class AppComponent {
   features: Feature[] = [

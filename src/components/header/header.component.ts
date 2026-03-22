@@ -14,7 +14,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <a href="#features" (click)="scrollTo($event, 'features')" class="text-gray-300 hover:text-red-500 transition-colors">Features</a>
       <a href="#stats" (click)="scrollTo($event, 'stats')" class="text-gray-300 hover:text-red-500 transition-colors">Stats</a>
       <a href="#projects" (click)="scrollTo($event, 'projects')" class="text-gray-300 hover:text-red-500 transition-colors">Ecosystem</a>
-      <a href="#explainer" (click)="scrollTo($event, 'explainer')" class="text-gray-300 hover:text-red-500 transition-colors">AI Explainer</a>
       <a href="https://signup.hive.io/" target="_blank" rel="noopener noreferrer" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition-colors">Get Started</a>
     </div>
   </nav>
