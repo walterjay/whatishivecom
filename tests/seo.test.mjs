@@ -3,15 +3,23 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { SITE_URL, loadPage, readSite, siteFileExists, structuredData, visibleFaq } from './helpers.mjs';
+import { PAGES, SITE_URL, loadPage, readSite, siteFileExists, structuredData, visibleFaq } from './helpers.mjs';
 
 const doc = loadPage();
 const meta = (selector) => doc.querySelector(selector)?.getAttribute('content');
 
-test('title is descriptive and a sensible length', () => {
+test('title is descriptive, names the search terms, and is a sensible length', () => {
   const title = doc.querySelector('title').textContent;
   assert.match(title, /What is Hive\?/);
+  assert.match(title, /Hive blockchain/);
   assert.ok(title.length <= 65, `title is ${title.length} characters`);
+});
+
+test('the page answers to "Hive chain" as well as "Hive blockchain"', () => {
+  const term = structuredData(doc).find((node) => node['@type'] === 'DefinedTerm');
+  assert.ok(term.alternateName.includes('Hive chain'));
+  assert.ok(term.alternateName.includes('Hive blockchain'));
+  assert.match(visibleFaq(doc)[0].answer, /Hive chain/);
 });
 
 test('meta description fits in a search result', () => {
@@ -86,12 +94,14 @@ test('robots.txt explicitly allows search engines and AI crawlers', () => {
   assert.match(robots, new RegExp(`^Sitemap: ${SITE_URL}sitemap\\.xml$`, 'm'));
 });
 
-test('sitemap.xml lists the page', () => {
+test('sitemap.xml lists every page, and nothing else', () => {
   const sitemap = readSite('sitemap.xml');
   assert.match(sitemap, /^<\?xml version="1\.0" encoding="UTF-8"\?>/);
   assert.match(sitemap, /xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"/);
-  assert.match(sitemap, new RegExp(`<loc>${SITE_URL}</loc>`));
-  assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
+  const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  const canonicals = PAGES.map((page) => loadPage(page).querySelector('link[rel="canonical"]').getAttribute('href'));
+  assert.deepEqual(locs.sort(), canonicals.sort());
+  assert.equal((sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) ?? []).length, locs.length);
 });
 
 test('llms.txt follows the llms.txt format and covers the essentials', () => {
@@ -107,4 +117,41 @@ test('llms.txt follows the llms.txt format and covers the essentials', () => {
 
 test('the page advertises llms.txt', () => {
   assert.ok(doc.querySelector('link[rel="alternate"][href="/llms.txt"]'));
+});
+
+// The beginner sign-up guide at /get-started/.
+const guide = loadPage('get-started/index.html');
+const guideMeta = (selector) => guide.querySelector(selector)?.getAttribute('content');
+
+test('get-started: title and description target "how to create a Hive account"', () => {
+  const title = guide.querySelector('title').textContent;
+  assert.match(title, /create a Hive account/i);
+  assert.ok(title.length <= 65, `title is ${title.length} characters`);
+  const description = guideMeta('meta[name="description"]');
+  assert.ok(description.length >= 70 && description.length <= 160, `description is ${description.length} characters`);
+});
+
+test('get-started: canonical, Open Graph, and Twitter tags point at the guide', () => {
+  const url = `${SITE_URL}get-started/`;
+  assert.equal(guide.querySelector('link[rel="canonical"]').getAttribute('href'), url);
+  assert.equal(guideMeta('meta[property="og:url"]'), url);
+  assert.equal(guideMeta('meta[name="twitter:card"]'), 'summary_large_image');
+  assert.ok(siteFileExists(new URL(guideMeta('meta[property="og:image"]')).pathname));
+});
+
+test('get-started: HowTo steps match the numbered steps on the page', () => {
+  const howTo = structuredData(guide).find((node) => node['@type'] === 'HowTo');
+  assert.ok(howTo, 'no HowTo');
+  const visible = [...guide.querySelectorAll('.steps > li')];
+  assert.equal(howTo.step.length, visible.length);
+  howTo.step.forEach((step, i) => {
+    assert.equal(step.name, visible[i].querySelector('h3').textContent.replace(/ \(.*\)$/, ''));
+    assert.equal(step.url, `${SITE_URL}get-started/#${visible[i].id}`);
+  });
+});
+
+test('get-started: breadcrumb leads back to the home page', () => {
+  const crumbs = structuredData(guide).find((node) => node['@type'] === 'BreadcrumbList');
+  assert.equal(crumbs.itemListElement[0].item, SITE_URL);
+  assert.ok(guide.querySelector('.breadcrumb a[href="/"]'));
 });

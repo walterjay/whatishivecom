@@ -8,7 +8,8 @@ import { countSentences, loadPage, mainTextWithout, readSite, structuredData, te
 const doc = loadPage();
 const hero = textOf(doc.getElementById('hero'));
 const bodyCopy = mainTextWithout(doc, '#faq');
-const everything = textOf(doc.documentElement) + ' ' + readSite('llms.txt');
+const guide = loadPage('get-started/index.html');
+const everything = [textOf(doc.documentElement), textOf(guide.documentElement), readSite('llms.txt')].join(' ');
 
 // Words the main body must not use. The FAQ is exempt: it's where the
 // technical explanation is supposed to live.
@@ -131,6 +132,37 @@ test('the "last reviewed" date agrees everywhere it appears', () => {
   const footerDate = doc.querySelector('footer time').getAttribute('datetime');
   const page = structuredData(doc).find((node) => node['@type'] === 'WebPage');
   assert.equal(page.dateModified, footerDate, 'JSON-LD dateModified');
+  assert.equal(guide.querySelector('footer time').getAttribute('datetime'), footerDate, 'get-started footer');
+  assert.equal(structuredData(guide).find((node) => node['@type'] === 'WebPage').dateModified, footerDate, 'get-started JSON-LD');
   assert.match(readSite('sitemap.xml'), new RegExp(`<lastmod>${footerDate}</lastmod>`), 'sitemap.xml lastmod');
   assert.match(readSite('llms.txt'), new RegExp(`Last reviewed: ${footerDate}`), 'llms.txt');
+});
+
+// Calls to action: every route into Hive should end at a real sign-up page.
+// When lite accounts launch, update SIGNUP_LINKS and the guide together.
+const SIGNUP_LINKS = ['https://ecency.com/signup', 'https://inleo.io/signup', 'https://signup.hive.io/'];
+
+test('the hero offers a way in: the guide first, hive.io second', () => {
+  const actions = [...doc.querySelectorAll('#hero .hero-actions a')].map((a) => a.getAttribute('href'));
+  assert.deepEqual(actions, ['/get-started/', 'https://hive.io/']);
+});
+
+test('the header links to the guide on every screen size', () => {
+  const link = doc.querySelector('.site-header a[href="/get-started/"]');
+  assert.ok(link, 'no header link to /get-started/');
+  assert.ok(!link.closest('.nav-optional'), 'the header link is hidden on phones');
+});
+
+test('get-started: every sign-up button goes to a provider listed on signup.hive.io', () => {
+  const buttons = [...guide.querySelectorAll('a.button[href^="http"]')].map((a) => a.getAttribute('href'));
+  assert.ok(buttons.length >= 2);
+  for (const href of buttons) assert.ok(SIGNUP_LINKS.includes(href), `${href} is not a known sign-up page`);
+});
+
+test('get-started: covers the essentials a beginner needs', () => {
+  const text = textOf(guide.querySelector('main'));
+  for (const must of [/free/i, /forgot password/i, /never share/i, /introduceyourself/, /hive\.io\/wallets/, /lite/i]) {
+    assert.match(text, must);
+  }
+  assert.match(textOf(guide.getElementById('hero')), /not Hive\.com or HIVE Digital/);
 });
