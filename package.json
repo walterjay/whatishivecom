@@ -1,29 +1,19 @@
 {
-  "name": "what-is-hive?",
+  "name": "whatishive",
+  "version": "2.0.0",
   "private": true,
-  "version": "0.0.0",
+  "description": "whatishive.com: a plain-language explainer of Hive. The site is plain static files in site/; this package only holds the tests.",
   "type": "module",
-  "scripts": {
-    "dev": "ng serve",
-    "build": "ng build",
-    "lint": "tsc --noEmit",
-    "preview": "ng serve --configuration=production"
+  "engines": {
+    "node": ">=24"
   },
-  "dependencies": {
-    "rxjs": "^7.8.2",
-    "@angular/forms": "^21.1.4",
-    "@angular/core": "^21.1.0",
-    "@angular/platform-browser": "^21.1.0",
-    "@angular/common": "^21.1.0",
-    "@angular/compiler": "^21.1.0",
-    "@angular/build": "^21.1.0",
-    "@angular/cli": "^21.1.0",
-    "@angular/compiler-cli": "^21.1.0",
-    "tailwindcss": "latest"
+  "scripts": {
+    "test": "npm run validate && node --test \"tests/**/*.test.mjs\"",
+    "validate": "html-validate \"site/**/*.html\"",
+    "start": "python3 -m http.server 8080 --directory site"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "typescript": "~5.9.2",
-    "vite": "^6.2.0"
+    "html-validate": "11.16.0",
+    "linkedom": "0.18.13"
   }
 }

@@ -1,20 +1,32 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# What is Hive?
 
-# Run and deploy your AI Studio app
+Source for **[whatishive.com](https://whatishive.com)**: a fast, plain-language, one-page explanation of Hive for people who have never heard of it.
 
-This contains everything you need to run your app locally.
+[![CI](https://github.com/walterjay/whatishivecom/actions/workflows/ci.yml/badge.svg)](https://github.com/walterjay/whatishivecom/actions/workflows/ci.yml)
 
-View your app in AI Studio: https://ai.studio/apps/0e95505e-37f4-426b-bae2-9915a6f2c8dd
+- **The site** is plain static files in [`site/`](site/). No framework, no build step.
+- **Deploys** automatically to Netlify when `main` changes. Netlify runs the tests first and won't publish if they fail.
+- **Every pull request** runs HTML validation, a test suite (structure, voice rules, SEO markup, price widget), and Lighthouse.
 
-## Run Locally
+## Quick start
 
-**Prerequisites:**  Node.js
+```bash
+npm install     # test tooling only
+npm test        # validate HTML and run the test suite
+npm start       # serve site/ at http://localhost:8080
+```
 
+Requires Node.js 24+ for the tests. The site itself needs nothing.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Documentation
+
+See the **[wiki](https://github.com/walterjay/whatishivecom/wiki)** (generated from [`docs/`](docs/)):
+
+- [Project structure](docs/Project-Structure.md)
+- [Editing content](docs/Editing-Content.md): read this before changing any copy
+- [Testing](docs/Testing.md)
+- [Deployment](docs/Deployment.md)
+- [SEO and AI search](docs/SEO-and-AI.md)
+- [History and decisions](docs/History.md)
+
+The previous Angular version is preserved at the tag [`v1-angular`](https://github.com/walterjay/whatishivecom/tree/v1-angular).
