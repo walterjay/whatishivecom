@@ -62,7 +62,7 @@ Each namesake is a `<div class="namesake">` with a `<dt>` (name, linked to its o
 
 ### Add or change a link
 
-External links must use `https://`. The "Where to go next" cards are a `<ul class="link-grid">`; copy an existing `<li>`.
+External links must use `https://` and open in a new tab with `target="_blank" rel="noopener"`, so readers keep this page open; internal links stay in the same tab. Tests enforce both. The "Where to go next" cards are a `<ul class="link-grid">`; copy an existing `<li>`.
 
 ### After any content change: bump the "last reviewed" date
 

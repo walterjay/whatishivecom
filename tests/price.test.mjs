@@ -135,6 +135,7 @@ test('render: no price at all falls back to a CoinGecko link', () => {
   assert.equal(view.price, '–');
   assert.match(view.status, /isn’t available right now/);
   assert.equal(root.querySelector('[data-status] a').getAttribute('href'), COINGECKO_PAGE);
+  assert.equal(root.querySelector('[data-status] a').getAttribute('target'), '_blank');
 });
 
 test('start: fetches immediately, then on each interval', async () => {
