@@ -1,0 +1,27 @@
+# Netlify reads this file on every deploy. Settings here override the ones in
+# the Netlify dashboard, so this file is the source of truth.
+
+[build]
+  # The site is plain static files; nothing is compiled.
+  publish = "site"
+  # Run the test suite as the "build": if a test fails, Netlify stops and the
+  # live site stays on the last good version.
+  command = "npm test"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+    # Only this site's own files may run. The one outside connection allowed
+    # is the CoinGecko price API.
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://api.coingecko.com; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"

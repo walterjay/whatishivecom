@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      # One-time bootstrap: there's no package-lock.json yet, so install and
+      # hand the generated lockfile back as an artifact to be committed.
+      - run: npm install --no-audit --no-fund
+      - uses: actions/upload-artifact@v7
+        with:
+          name: package-lock
+          path: package-lock.json
+      - name: HTML validation and test suite
+        run: npm test
+
+  lighthouse:
+    name: Lighthouse (performance, accessibility, SEO)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - name: Run Lighthouse CI
+        run: npx --yes @lhci/cli@0.15.1 autorun
