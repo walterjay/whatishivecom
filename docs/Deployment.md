@@ -26,18 +26,21 @@ Small fixes can go straight to a PR into `main` if they don't need testing on st
 
 ### How staging differs from production
 
-The `[context.new]` block in `netlify.toml` runs the same tests, then `scripts/staging.mjs`, which (on Netlify's build copy only):
+Every Netlify build runs `npm test && node scripts/staging.mjs site`. The staging script does nothing unless the branch being built is `new` (Netlify sets `BRANCH` during builds). For `new`, on Netlify's build copy only, it:
 
 - replaces `robots.txt` with `Disallow: /`, sends `X-Robots-Tag: noindex, nofollow`, and adds a `noindex` meta tag to every page, so the test site never competes with the real one in search;
 - adds a "Test site: changes here are not live yet" banner linking to whatishive.com.
 
 Canonical URLs still point at whatishive.com. `tests/staging.test.mjs` checks the script.
 
-### One-time setup (already done once; here for reference)
+### One-time setup (for reference)
 
-1. **Netlify → Site configuration → Build & deploy → Branches and deploy contexts → Branch deploys:** "Let me add individual branches", add `new`.
-2. **Cloudflare DNS for whatishive.com:** add a `CNAME` record, name `new`, target `new--whatishive.netlify.app`, **Proxy status: DNS only** (grey cloud), so Netlify can issue the HTTPS certificate.
-3. **Netlify → Domain management → Branch subdomains → New subdomain:** branch `new`, subdomain `new`. Wait for the HTTPS certificate (usually a few minutes).
+Netlify's "branch subdomain" feature only works when the domain's DNS is on Netlify, and whatishive.com's DNS is on Cloudflare. So staging is a **second Netlify project** built from the same repository, with `new` as its production branch:
+
+1. **Netlify → Projects → Add new project → Import an existing project → GitHub → `walterjay/whatishivecom`.** Set **Branch to deploy** to `new`, leave the build settings alone (`netlify.toml` provides them), name it `whatishive-new`, and deploy.
+2. **In that project → Project configuration → Build & deploy → Continuous deployment → Branches and deploy contexts → Configure:** Branch deploys **Deploy only the production branch**; Deploy Previews **Don't deploy Deploy Previews** (the main project already builds previews for PRs).
+3. **In that project → Domain management → Add a domain:** `new.whatishive.com`. Netlify then asks for a DNS record.
+4. **Cloudflare → whatishive.com → DNS → Add record:** type `CNAME`, name `new`, target `whatishive-new.netlify.app`, **Proxy status: DNS only** (grey cloud), so Netlify can issue the HTTPS certificate automatically.
 
 ## Netlify settings
 

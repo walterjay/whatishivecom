@@ -5,17 +5,13 @@
   # The site is plain static files; nothing is compiled.
   publish = "site"
   # Run the test suite as the "build": if a test fails, Netlify stops and the
-  # live site stays on the last good version.
-  command = "npm test"
+  # live site stays on the last good version. The staging step only changes
+  # anything when the branch is `new` (new.whatishive.com); see
+  # scripts/staging.mjs.
+  command = "npm test && node scripts/staging.mjs site"
 
 [build.environment]
   NODE_VERSION = "24"
-
-# Staging: the `new` branch deploys to new.whatishive.com. Same tests, then
-# scripts/staging.mjs hides it from search engines and adds a "test site"
-# banner, on Netlify's build copy only.
-[context.new]
-  command = "npm test && node scripts/staging.mjs site"
 
 [[headers]]
   for = "/*"
