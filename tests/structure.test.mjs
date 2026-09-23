@@ -23,7 +23,7 @@ test('heading levels never skip (h1 → h2 → h3)', () => {
 
 test('sections appear in the order of the content brief', () => {
   const order = [...doc.querySelectorAll('main > section')].map((section) => section.id);
-  assert.deepEqual(order, ['hero', 'what', 'communities', 'payments', 'more', 'price', 'faq', 'links']);
+  assert.deepEqual(order, ['hero', 'what', 'communities', 'payments', 'more', 'price', 'faq', 'other-hives', 'links']);
 });
 
 test('every section is labelled by its own heading', () => {

@@ -31,6 +31,8 @@ The `<h1>` also contains the eyebrow "What is Hive?" so the page's main heading 
 - **Tests as the Netlify build command**, so a broken change can't reach the live site even if it's pushed straight to `main`.
 - **Voice rules as tests** ([Editing content](Editing-Content.md)), so the plain-language promise survives future edits.
 - **Docs in the repo, mirrored to the wiki**, so documentation changes are reviewed like code and can't silently diverge.
+- **Official Hive logo** (added after launch at the owner's request, as a Hive community member): the brand assets at https://hive.io/brand are published "by the community, for the community". The mark is used as-is in Hive Red and credited in the footer.
+- **"Other things called Hive"**: a section listing seven unrelated namesakes that commonly show up in searches: HIVE Digital Technologies (the most confusing, since its Nasdaq ticker is HIVE and it used to be called HIVE Blockchain Technologies), Hive.com, Hive Social, Hive smart home, Apache Hive, Hive AI, and Hive OS/Hiveon. The same list is in `llms.txt` and in the JSON-LD `disambiguatingDescription`.
 - **Social image** (`og-image.png`) was drawn as an SVG and rendered to PNG with macOS Quick Look (`qlmanage -t -s 1200`), then cropped to 1200×630 with `sips`. Any tool that exports a 1200×630 PNG works for replacing it.
 
 ### Facts checked at launch (23 September 2026)

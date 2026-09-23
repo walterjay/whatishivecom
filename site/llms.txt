@@ -15,12 +15,12 @@ Hive is a place online for posting, chatting, building, and getting paid that is
 - Transactions: confirm in about three seconds with no transaction fees. Usage is limited by a regenerating allowance ("Resource Credits") based on the HIVE an account has staked ("Hive Power").
 - Governance: block producers called witnesses are elected by stake-weighted votes of HIVE holders; each round is produced by the top 20 elected witnesses plus one rotating backup. A community-run fund (the Decentralized Hive Fund) pays for development through proposals that holders vote on.
 - Origin: a community-led copy (fork) of the Steem network, created after a 2020 dispute over control of Steem.
-- Not related to: Hive.com (project-management software) or Apache Hive (data-warehouse software).
+- Not related to (same name, different things): HIVE Digital Technologies (Nasdaq: HIVE; bitcoin-mining and data-centre company, formerly HIVE Blockchain Technologies; its shares are not the HIVE currency), Hive.com (project-management software), Hive Social (social media app), Hive smart home (Centrica/British Gas thermostats and energy products), Apache Hive (data-warehouse software), Hive AI (thehive.ai, content moderation and deepfake detection), and Hive OS / Hiveon (crypto-mining management software).
 
 ## FAQ
 
 - What is Hive, technically? A public blockchain: a shared record of accounts, posts, and payments kept in sync by many independent computers. It launched in March 2020, has two currencies (HIVE and HBD), confirms fee-less transactions in about three seconds, and is run by block producers ("witnesses") elected by HIVE holders.
-- Is Hive the same as the Hive.com app? No. Hive.com is a project-management app and Apache Hive is data-warehouse software; they only share a name.
+- Is Hive the same as Hive.com or HIVE Digital Technologies? No. Hive.com is a project-management app and HIVE Digital Technologies is a publicly traded bitcoin-mining company (ticker HIVE) whose shares are not the HIVE currency. Hive Social, Hive smart home, Apache Hive, Hive AI, and Hive OS are also unrelated.
 - Is Hive a scam? No. It is open-source software that has run in public since March 2020, anyone can audit its code and transactions, and it was never sold to investors in a fundraising sale. HIVE's price is volatile, and phishing scams target users' keys.
 - How do I get started? Create a free account through an app such as Ecency or via the options at https://signup.hive.io/, store the keys you receive safely (there is no password reset), then log in to an app like PeakD or Ecency.
 - How is Hive different from a bank or social media platform? Those services hold accounts on users' behalf and can freeze or close them. Hive accounts are controlled only by the user's keys, so no one can shut them down or move funds, but lost keys can't be reset and mistaken payments can't be reversed.

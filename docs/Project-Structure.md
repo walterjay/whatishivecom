@@ -9,8 +9,9 @@ site/                  ← everything Netlify publishes (and nothing else)
   llms.txt             plain-text summary for language models
   robots.txt           crawler rules (everyone allowed, AI crawlers named explicitly)
   sitemap.xml          one-URL sitemap
-  favicon.svg          browser tab icon
-  apple-touch-icon.png home-screen icon (180×180)
+  favicon.svg          browser tab icon: official Hive mark (vector)
+  favicon.ico          browser tab icon: official Hive favicon (for older browsers)
+  apple-touch-icon.png home-screen icon (180×180), official Hive asset
   og-image.png         social share image (1200×630)
 
 tests/                 Node test suite (node:test), run by `npm test`
@@ -38,6 +39,7 @@ CLAUDE.md              short brief for AI coding assistants working in this repo
 - **No framework, no build.** The page is a single document. A framework would add weight and a build step without adding anything a reader would notice. What's in `site/` is exactly what's served.
 - **System fonts.** Zero font downloads, so text renders immediately.
 - **One small script.** Only the price block needs JavaScript. It's an ES module, so it never blocks rendering, and the page reads fine with JavaScript off (the block shows a link to CoinGecko instead).
+- **Official Hive logo.** The header mark, favicons, touch icon, and the mark on the share image come from the community brand pack at https://hive.io/brand (`hive-branding.zip`). The logo is always shown in official Hive Red `#E31337`; the footer credits the source.
 - **Colours as CSS variables** at the top of `styles.css`, redefined for dark mode. The accent is Hive red, darkened to `#c8102e` so red text passes WCAG AA contrast (4.5:1) on every background used.
 - **Strict Content-Security-Policy** (in `netlify.toml`): only the site's own files may run, and the only outside connection allowed is `api.coingecko.com`. This is why the page has no inline scripts (JSON-LD is data, not script, so it's fine) and no `style="…"` attributes. The tests check both.
 
