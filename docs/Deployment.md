@@ -20,7 +20,9 @@ flowchart LR
 
 1. Make the change on a branch and open a pull request into **`new`**. CI runs the tests and Lighthouse, and Netlify posts a deploy preview link.
 2. Merge it (by hand, after reviewing). Netlify deploys `new` to https://new.whatishive.com within a minute.
-3. When you're happy with what's on staging, open a pull request from `new` into **`main`** and merge it. Netlify publishes it to https://whatishive.com.
+3. When you're happy with what's on staging, open a pull request from `new` into **`main`** and merge it with **"Create a merge commit"** (not "Squash and merge"). Netlify publishes it to https://whatishive.com.
+
+   Why a merge commit: squashing copies `new`'s changes into a brand-new commit on `main`, so the two branches no longer share history and the next pull request into `new` shows conflicts even though the files are identical. Feature branches going into `new` can be squashed as usual.
 
 Small fixes can go straight to a PR into `main` if they don't need testing on staging. PRs are never merged automatically.
 
