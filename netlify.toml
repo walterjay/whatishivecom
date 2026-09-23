@@ -11,6 +11,12 @@
 [build.environment]
   NODE_VERSION = "24"
 
+# Staging: the `new` branch deploys to new.whatishive.com. Same tests, then
+# scripts/staging.mjs hides it from search engines and adds a "test site"
+# banner, on Netlify's build copy only.
+[context.new]
+  command = "npm test && node scripts/staging.mjs site"
+
 [[headers]]
   for = "/*"
   [headers.values]

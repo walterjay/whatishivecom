@@ -24,6 +24,10 @@ tests/                 Node test suite (node:test), run by `npm test`
   content.test.mjs     the voice rules: jargon, hype, "blockchain" placement, FAQ length
   seo.test.mjs         meta tags, JSON-LD ↔ visible FAQ, robots, sitemap, llms.txt
   price.test.mjs       price widget logic with CoinGecko faked out
+  staging.test.mjs     the staging build step, run on a throwaway copy of site/
+
+scripts/
+  staging.mjs          turns Netlify's build copy into the staging site (noindex + banner); `new` branch only
 
 docs/                  this documentation (synced to the GitHub wiki)
 .github/workflows/
