@@ -13,7 +13,7 @@ export function readSite(path) {
 }
 
 /** Pages Netlify publishes, as paths inside site/. */
-export const PAGES = ['index.html', 'get-started/index.html'];
+export const PAGES = ['index.html', 'get-started/index.html', 'invite/index.html'];
 
 /** Does a site path like "/favicon.svg" or "/get-started/" resolve to a published file? */
 export function siteFileExists(path) {

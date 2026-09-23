@@ -166,3 +166,25 @@ test('get-started: covers the essentials a beginner needs', () => {
   }
   assert.match(textOf(guide.getElementById('hero')), /not Hive\.com or HIVE Digital/);
 });
+
+// The invite pilot at /invite/.
+const invite = loadPage('invite/index.html');
+const TALLY_FORM = 'https://tally.so/r/rj7OV2';
+
+test('invite: every apply button opens the Tally form', () => {
+  const external = [...invite.querySelectorAll('a.button[href^="http"]')].map((a) => a.getAttribute('href'));
+  assert.ok(external.length >= 2);
+  for (const href of external) assert.equal(href, TALLY_FORM);
+});
+
+test('invite: sets expectations honestly', () => {
+  const text = textOf(invite.querySelector('main'));
+  for (const must of [/100/, /by hand/i, /never see your private keys/i, /recovery account/i, /free/i, /delete your request/i]) {
+    assert.match(text, must);
+  }
+  assert.ok(invite.querySelector('main a[href="/get-started/"]'), 'no route to the instant options');
+});
+
+test('get-started: offers the invite as an option', () => {
+  assert.ok(guide.querySelector('#step-app a[href="/invite/"]'));
+});
