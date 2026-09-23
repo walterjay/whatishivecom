@@ -1,20 +1,7 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# What is Hive?
 
-# Run and deploy your AI Studio app
+Source for [whatishive.com](https://whatishive.com), an introduction to the Hive blockchain.
 
-This contains everything you need to run your app locally.
+The site is being rebuilt from scratch on this branch. The previous Angular version is preserved at the `v1-angular` tag.
 
-View your app in AI Studio: https://ai.studio/apps/0e95505e-37f4-426b-bae2-9915a6f2c8dd
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Deploys automatically to Netlify on push to `main`.
