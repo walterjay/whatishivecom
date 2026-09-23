@@ -13,13 +13,22 @@ A secondary goal of the site is to be the page AI answer engines cite when someo
 | Meta tags | `<head>` | Title, description, canonical, Open Graph, Twitter card, all plain factual statements. |
 | `llms.txt` | `site/llms.txt` | A plain-text summary written for language models: definition, key facts, condensed FAQ, links. Follows the [llms.txt](https://llmstxt.org) format. Linked from the page with `<link rel="alternate">` and in the footer. |
 | `robots.txt` | `site/robots.txt` | Allows everything, and names the search and AI crawlers explicitly: GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, Perplexity-User, ClaudeBot, Claude-SearchBot, Claude-User, anthropic-ai, Google-Extended, Applebot-Extended, CCBot, meta-externalagent, Amazonbot, plus Googlebot, Bingbot, DuckDuckBot, and Applebot. |
-| `sitemap.xml` | `site/sitemap.xml` | One URL, with `lastmod`. |
+| `sitemap.xml` | `site/sitemap.xml` | Every page, each with `lastmod`. A test checks it matches the pages' canonical URLs. |
+| Sign-up guide | `site/get-started/index.html` | Targets "how to create a Hive account", "hive sign up", and "join hive". In September 2026 those searches mostly returned help pages for Hive.com (the project-management app), so a clear guide can rank. Marked up with `HowTo` and `BreadcrumbList`. |
+| Search terms | Title, FAQ, JSON-LD | The home page title says "Hive blockchain"; the FAQ and `alternateName` also say "Hive chain", so the page matches the ways people actually search. |
 
 ## Why `DefinedTerm` and not `Organization` for Hive
 
 Hive isn't a company. There's no legal entity or CEO to describe, so marking it up as an `Organization` would be inaccurate. `DefinedTerm` says exactly what this page does: define a term. The `Organization` in the markup is the publisher of the page (whatishive.com), not Hive.
 
 Wikipedia isn't in `sameAs` because, as of September 2026, there is no standalone English Wikipedia article for the Hive network.
+
+## Adding a page
+
+1. Create `site/<name>/index.html` (copy `get-started/index.html` for the header, footer, and meta tags).
+2. Add it to `PAGES` in `tests/helpers.mjs` so the structure tests cover it.
+3. Add its URL to `site/sitemap.xml` (a test checks the sitemap matches every page's canonical URL).
+4. Link to it from the home page and from `llms.txt`.
 
 ## Checking it
 

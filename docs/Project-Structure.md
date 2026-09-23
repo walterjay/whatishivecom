@@ -2,13 +2,15 @@
 
 ```
 site/                  ← everything Netlify publishes (and nothing else)
-  index.html           the page, including meta tags and JSON-LD structured data
+  index.html           the home page, including meta tags and JSON-LD structured data
+  get-started/
+    index.html         "How to create a Hive account": the beginner sign-up guide (/get-started/)
   404.html             "page not found" (Netlify serves it automatically)
   assets/styles.css    all styling; light and dark mode; system fonts only
   assets/price.js      the live HIVE price block (ES module, loaded deferred)
   llms.txt             plain-text summary for language models
   robots.txt           crawler rules (everyone allowed, AI crawlers named explicitly)
-  sitemap.xml          one-URL sitemap
+  sitemap.xml          sitemap (one entry per page)
   favicon.svg          browser tab icon: official Hive mark (vector)
   favicon.ico          browser tab icon: official Hive favicon (for older browsers)
   apple-touch-icon.png home-screen icon (180×180), official Hive asset

@@ -33,6 +33,21 @@ An FAQ answer exists in **two places** that must match word for word (straight v
 
 Add a new `faq-item` (with a unique `id`), a matching `Question` in the JSON-LD `mainEntity` array **in the same position**, and a line in the `## FAQ` section of `llms.txt`.
 
+### Change the sign-up call to action (for example, when lite accounts launch)
+
+Every route into Hive ends at `/get-started/`, so most changes happen on that one page. The places that point people to sign up:
+
+| Where | What to change |
+|---|---|
+| `site/get-started/index.html`, step 1 | The sign-up buttons (currently Ecency and InLeo) and their descriptions |
+| `site/get-started/index.html`, "Even easier sign-up is on the way" | Replace with a short note once lite accounts are live; update the bottom "Create a free account" button |
+| `site/get-started/index.html`, HowTo JSON-LD | Step 1's `text` (and any other step you change) |
+| `site/index.html`, FAQ "How do I actually get started?" | Visible answer **and** its JSON-LD copy |
+| `site/llms.txt` | The "How do I get started?" line |
+| `tests/content.test.mjs`, `SIGNUP_LINKS` | The list of sign-up URLs the buttons are allowed to use |
+
+The hero button, header button, and "Where to go next" card all point at `/get-started/` and don't need to change.
+
 ### Update "Other things called Hive"
 
 Each namesake is a `<div class="namesake">` with a `<dt>` (name, linked to its official site) and a `<dd>` (one plain sentence or two). The tests expect 5–8 entries. Keep the list in sync with the "Not related to" line in `llms.txt` and the `disambiguatingDescription` in the JSON-LD.
@@ -43,11 +58,11 @@ External links must use `https://`. The "Where to go next" cards are a `<ul clas
 
 ### After any content change: bump the "last reviewed" date
 
-Update the date in all four places (the test checks they agree):
+Update the date everywhere it appears (the test checks they agree):
 
-- `index.html` footer: `<time datetime="YYYY-MM-DD">`
-- `index.html` JSON-LD: `"dateModified"`
-- `site/sitemap.xml`: `<lastmod>`
+- `index.html` and `get-started/index.html` footers: `<time datetime="YYYY-MM-DD">`
+- `index.html` and `get-started/index.html` JSON-LD: `"dateModified"`
+- `site/sitemap.xml`: `<lastmod>` for each page
 - `site/llms.txt`: `Last reviewed: YYYY-MM-DD`
 
 ## Checking a change
