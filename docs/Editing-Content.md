@@ -48,6 +48,14 @@ Every route into Hive ends at `/get-started/`, so most changes happen on that on
 
 The hero button, header button, and "Where to go next" card all point at `/get-started/` and don't need to change.
 
+### The invite pilot (/invite/)
+
+`site/invite/index.html` explains the pilot and links to the Tally form at https://tally.so/r/rj7OV2 (responses are in Walter's Tally account, not Netlify). Forms deliberately stay off Netlify: on the Starter plan, going over the form-submission limit would pause every site on the account.
+
+- To close or pause the pilot, change the page copy and point the buttons back to `/get-started/`, or close the form in Tally.
+- If the form link changes, update both buttons and `TALLY_FORM` in `tests/content.test.mjs`.
+- The page promises that private keys are never shared (Ecency's "Invited by a friend" flow) and explains the recovery-account role; keep both if the process changes.
+
 ### Update "Other things called Hive"
 
 Each namesake is a `<div class="namesake">` with a `<dt>` (name, linked to its official site) and a `<dd>` (one plain sentence or two). The tests expect 5–8 entries. Keep the list in sync with the "Not related to" line in `llms.txt` and the `disambiguatingDescription` in the JSON-LD.

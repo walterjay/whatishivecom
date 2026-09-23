@@ -5,6 +5,8 @@ site/                  ← everything Netlify publishes (and nothing else)
   index.html           the home page, including meta tags and JSON-LD structured data
   get-started/
     index.html         "How to create a Hive account": the beginner sign-up guide (/get-started/)
+  invite/
+    index.html         the free, hand-reviewed invite pilot (/invite/); applications go to a Tally form
   404.html             "page not found" (Netlify serves it automatically)
   assets/styles.css    all styling; light and dark mode; system fonts only
   assets/price.js      the live HIVE price block (ES module, loaded deferred)
