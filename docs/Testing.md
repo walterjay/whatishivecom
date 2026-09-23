@@ -27,7 +27,7 @@ Three layers, all automatic:
 
 **`tests/price.test.mjs`**: the price widget with CoinGecko faked: parsing good and bad responses, number formatting, HTTP errors, network failures, timeouts, the fresh, stale, and unavailable display states, refreshing on an interval, and pausing while the tab is hidden. The suite never makes a network request.
 
-**Lighthouse** thresholds (`lighthouserc.json`): performance ≥ 95 and accessibility ≥ 95 fail the build; SEO ≥ 90 fails the build (it's not held to 95 because when Lighthouse runs against `localhost`, the canonical link to whatishive.com is flagged as "different domain", which costs a few points and doesn't happen in production); best practices ≥ 90 only warns (it can dip if CoinGecko rate-limits the CI machine). Each run uploads a full report; the link is in the job log under "Uploading…".
+**Lighthouse** thresholds (`lighthouserc.json`): performance, accessibility, and SEO must each score ≥ 95 or the check fails. Best practices ≥ 90 only warns, because it can dip if CoinGecko rate-limits the CI machine and the browser logs the failed request. At launch the page scored 100 in all four categories on Lighthouse's mobile settings. Each run uploads a full public report; the link is in the job log after "Open the report at".
 
 ## Running tests on your computer
 

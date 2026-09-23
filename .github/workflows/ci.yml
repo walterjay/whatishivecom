@@ -22,13 +22,8 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-      # One-time bootstrap: there's no package-lock.json yet, so install and
-      # hand the generated lockfile back as an artifact to be committed.
-      - run: npm install --no-audit --no-fund
-      - uses: actions/upload-artifact@v7
-        with:
-          name: package-lock
-          path: package-lock.json
+          cache: npm
+      - run: npm ci --no-audit --no-fund
       - name: HTML validation and test suite
         run: npm test
 
