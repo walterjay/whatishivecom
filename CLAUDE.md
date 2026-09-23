@@ -11,4 +11,5 @@ One static page explaining Hive in plain language. Files in `site/` are publishe
 - No inline scripts (except JSON-LD) and no `style=""` attributes: the CSP in `netlify.toml` blocks them.
 - Documentation lives in `docs/` and is synced to the GitHub wiki by `.github/workflows/wiki.yml`; update it when behaviour changes.
 - Branches: `main` = whatishive.com (production), `new` = new.whatishive.com (staging: a second Netlify project; `scripts/staging.mjs` adds noindex + a banner when `BRANCH=new`). Feature branches → PR into `new` → PR `new` → `main`.
-- Merging: PRs into `new` may be merged once CI is green. Never merge into `main`: open the PR, report CI and preview results, and let the owner merge.
+- Branch feature work off `new`. Promote with a PR `new` → `main` merged as a merge commit (never squash), or the branches diverge.
+- Merging: PRs into `new` may be merged (squash) once CI is green. Never merge into `main`: open the PR, report CI and preview results, and let the owner merge.
