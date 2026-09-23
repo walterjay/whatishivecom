@@ -47,7 +47,8 @@ test('the hero never says "blockchain"', () => {
 });
 
 test('"blockchain" appears at most once in the body copy (outside the FAQ)', () => {
-  const count = (bodyCopy.match(/blockchain/gi) ?? []).length;
+  // A company's former name isn't an explanation of Hive, so it doesn't count.
+  const count = (bodyCopy.replace(/HIVE Blockchain Technologies/g, '').match(/blockchain/gi) ?? []).length;
   assert.ok(count <= 1, `found ${count} mentions outside the FAQ`);
 });
 
@@ -72,9 +73,21 @@ for (const word of HYPE) {
   });
 }
 
-test('the hero rules out the other things called Hive', () => {
+test('the hero rules out the most confusable namesakes and links to the full list', () => {
+  assert.match(hero, /HIVE Digital Technologies/);
   assert.match(hero, /Hive\.com/);
-  assert.match(hero, /Apache Hive/);
+  assert.ok(doc.querySelector('#hero a[href="#other-hives"]'), 'hero should link to #other-hives');
+});
+
+test('"Other things called Hive" lists the common namesakes', () => {
+  const names = [...doc.querySelectorAll('#other-hives dt')].map(textOf);
+  assert.ok(names.length >= 5 && names.length <= 8, `${names.length} entries`);
+  for (const expected of [/HIVE Digital/, /Hive\.com/, /Apache Hive/, /Hive Social/]) {
+    assert.ok(names.some((name) => expected.test(name)), `missing ${expected}`);
+  }
+  for (const entry of doc.querySelectorAll('#other-hives dd')) {
+    assert.ok(textOf(entry).length > 20, 'each namesake needs a short description');
+  }
 });
 
 test('the hero subhead names Hive in one sentence', () => {

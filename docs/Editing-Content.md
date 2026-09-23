@@ -33,6 +33,10 @@ An FAQ answer exists in **two places** that must match word for word (straight v
 
 Add a new `faq-item` (with a unique `id`), a matching `Question` in the JSON-LD `mainEntity` array **in the same position**, and a line in the `## FAQ` section of `llms.txt`.
 
+### Update "Other things called Hive"
+
+Each namesake is a `<div class="namesake">` with a `<dt>` (name, linked to its official site) and a `<dd>` (one plain sentence or two). The tests expect 5–8 entries. Keep the list in sync with the "Not related to" line in `llms.txt` and the `disambiguatingDescription` in the JSON-LD.
+
 ### Add or change a link
 
 External links must use `https://`. The "Where to go next" cards are a `<ul class="link-grid">`; copy an existing `<li>`.
