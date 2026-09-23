@@ -140,6 +140,21 @@ a:hover {
   top: 1rem;
 }
 
+/* Only on the staging site (added by scripts/staging.mjs). */
+.staging-banner {
+  margin: 0;
+  padding: 0.5rem 1.25rem;
+  background: #7a4a00;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.staging-banner a {
+  color: inherit;
+}
+
 /* Header */
 
 .site-header {

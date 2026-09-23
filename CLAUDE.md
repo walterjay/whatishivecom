@@ -10,4 +10,5 @@ One static page explaining Hive in plain language. Files in `site/` are publishe
 - Sign-up call to action: all buttons lead to `/get-started/`; to change providers (e.g. when lite accounts launch) follow "Change the sign-up call to action" in `docs/Editing-Content.md`.
 - No inline scripts (except JSON-LD) and no `style=""` attributes: the CSP in `netlify.toml` blocks them.
 - Documentation lives in `docs/` and is synced to the GitHub wiki by `.github/workflows/wiki.yml`; update it when behaviour changes.
-- Work on a branch and open a PR; merging to `main` deploys to production.
+- Branches: `main` = whatishive.com (production), `new` = new.whatishive.com (staging, noindex + banner via `scripts/staging.mjs`). Feature branches → PR into `new` → PR `new` → `main`.
+- Never merge PRs yourself: open them, report CI and preview results, and let the owner merge.
