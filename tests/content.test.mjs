@@ -183,6 +183,7 @@ test('invite: sets expectations honestly', () => {
     assert.match(text, must);
   }
   assert.ok(invite.querySelector('main a[href="/get-started/"]'), 'no route to the instant options');
+  assert.ok(invite.querySelector('#hero a[href="https://peakd.com/@walterjay"]'), 'intro should link to @walterjay');
 });
 
 test('get-started: offers the invite as an option', () => {

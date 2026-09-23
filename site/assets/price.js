@@ -95,6 +95,8 @@ export function render(root, { quote, failed }, locale) {
     root.dataset.state = 'error';
     const link = doc.createElement('a');
     link.setAttribute('href', COINGECKO_PAGE);
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener');
     link.textContent = 'check it on CoinGecko';
     statusEl.append('The live price isn’t available right now. You can ', link, '.');
   }

@@ -63,6 +63,20 @@ for (const page of PAGES) {
     }
   });
 
+  test(`${page}: external links open in a new tab, safely`, () => {
+    for (const link of doc.querySelectorAll('a[href^="http"]')) {
+      const href = link.getAttribute('href');
+      assert.equal(link.getAttribute('target'), '_blank', `${href} opens in the same tab`);
+      assert.match(link.getAttribute('rel') ?? '', /\bnoopener\b/, `${href} is missing rel="noopener"`);
+    }
+  });
+
+  test(`${page}: internal links stay in the same tab`, () => {
+    for (const link of doc.querySelectorAll('a[href^="/"], a[href^="#"]')) {
+      assert.equal(link.getAttribute('target'), null, `${link.getAttribute('href')} opens a new tab`);
+    }
+  });
+
   test(`${page}: no render-blocking scripts, and no inline scripts other than JSON-LD`, () => {
     for (const script of doc.querySelectorAll('script')) {
       const type = script.getAttribute('type');
