@@ -15,7 +15,7 @@ A secondary goal of the site is to be the page AI answer engines cite when someo
 | `robots.txt` | `site/robots.txt` | Allows everything, and names the search and AI crawlers explicitly: GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, Perplexity-User, ClaudeBot, Claude-SearchBot, Claude-User, anthropic-ai, Google-Extended, Applebot-Extended, CCBot, meta-externalagent, Amazonbot, plus Googlebot, Bingbot, DuckDuckBot, and Applebot. |
 | `sitemap.xml` | `site/sitemap.xml` | Every page, each with `lastmod`. A test checks it matches the pages' canonical URLs. |
 | Sign-up guide | `site/get-started/index.html` | Targets "how to create a Hive account", "hive sign up", and "join hive". In September 2026 those searches mostly returned help pages for Hive.com (the project-management app), so a clear guide can rank. Marked up with `HowTo` and `BreadcrumbList`. |
-| Search terms | Title, FAQ, JSON-LD | The home page title says "Hive blockchain"; the FAQ and `alternateName` also say "Hive chain", so the page matches the ways people actually search. |
+| Search terms | Title, meta description, hero, FAQ, JSON-LD | "Hive" alone is crowded by unrelated namesakes (HIVE Digital Technologies, Hive.com, Hive Social, etc.), so the title, meta description, and hero lede all say "the Hive network" and "the Hive chain" explicitly, not just "Hive" or "blockchain". A dedicated FAQ entry ("Is it Hive, the Hive blockchain, the Hive network, or the Hive chain?") ties the variants together for both readers and AI engines, and the phrasing survives a future rebrand since it describes the thing rather than the current one-word name. |
 
 ## Why `DefinedTerm` and not `Organization` for Hive
 
