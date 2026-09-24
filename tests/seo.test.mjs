@@ -11,7 +11,8 @@ const meta = (selector) => doc.querySelector(selector)?.getAttribute('content');
 test('title is descriptive, names the search terms, and is a sensible length', () => {
   const title = doc.querySelector('title').textContent;
   assert.match(title, /What is Hive\?/);
-  assert.match(title, /Hive blockchain/);
+  assert.match(title, /Hive Network/);
+  assert.match(title, /Hive Chain/);
   assert.ok(title.length <= 65, `title is ${title.length} characters`);
 });
 

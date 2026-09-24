@@ -2,7 +2,7 @@
 
 > Hive is a free, open network for posting, building online communities, and sending money, where no single company owns or controls users' accounts, content, or funds. Technically, Hive (also called the Hive blockchain or Hive chain) is a public blockchain that launched on 20 March 2020.
 
-This file summarises https://whatishive.com/, an independent, plain-language explainer of Hive for people with no blockchain background. It is not affiliated with any company. Last reviewed: 2026-09-23.
+This file summarises https://whatishive.com/, an independent, plain-language explainer of Hive for people with no blockchain background. It is not affiliated with any company. Last reviewed: 2026-09-24.
 
 ## Definition
 
@@ -19,6 +19,7 @@ Hive is a place online for posting, chatting, building, and getting paid that is
 
 ## FAQ
 
+- Is it Hive, the Hive blockchain, the Hive network, or the Hive chain? All four names refer to the same public network; this page and the community use them interchangeably.
 - What is Hive, technically? A public blockchain: a shared record of accounts, posts, and payments kept in sync by many independent computers. It launched in March 2020, has two currencies (HIVE and HBD), confirms fee-less transactions in about three seconds, and is run by block producers ("witnesses") elected by HIVE holders.
 - Is Hive the same as Hive.com or HIVE Digital Technologies? No. Hive.com is a project-management app and HIVE Digital Technologies is a publicly traded bitcoin-mining company (ticker HIVE) whose shares are not the HIVE currency. Hive Social, Hive smart home, Apache Hive, Hive AI, and Hive OS are also unrelated.
 - Is Hive a scam? No. It is open-source software that has run in public since March 2020, anyone can audit its code and transactions, and it was never sold to investors in a fundraising sale. HIVE's price is volatile, and phishing scams target users' keys.
